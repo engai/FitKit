@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(this, "zQ6SZImPJDvJrrroriwiLT9kds0SG9V1KrTWTglM", "NNvWMkDmlcgW0s91VbIyytvAqV0K3i3R4Yb5zRhs");
 
         /*Image button to go to user profile.*/
         ImageButton userButton = (ImageButton) findViewById(R.id.userProfileButton);

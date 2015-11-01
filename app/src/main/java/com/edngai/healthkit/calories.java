@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.parse.ParseObject;
+
 
 //Crystal: I commented out some stuff just in case things go wrong
 //I know what the original code looked like; we can clean up later!
@@ -103,7 +105,7 @@ public class calories extends AppCompatActivity {
 
         // get add_calories.xml view
         LayoutInflater layoutInflater = LayoutInflater.from(calories.this);
-        View promptView = layoutInflater.inflate(R.layout.add_calories, null);
+        final View promptView = layoutInflater.inflate(R.layout.add_calories, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(calories.this);
         alertDialogBuilder.setView(promptView);
 
@@ -124,9 +126,17 @@ public class calories extends AppCompatActivity {
                                 //!!!
                                 //!!!
 
+                                String food = ((EditText) promptView.findViewById(R.id.edittext)).getText().toString();
+                                String calories = ((EditText) promptView.findViewById(R.id.edittext2)).getText().toString();
+
+                                ParseObject item = new ParseObject("Calories");
+                                item.put("food", food);
+                                item.put("calories", calories);
+                                item.saveInBackground();
+
                                 //Toast to show button works
                                 Toast added = Toast.makeText(getApplicationContext(),
-                                        "Food added!", Toast.LENGTH_SHORT);
+                                        food + " added!", Toast.LENGTH_SHORT);
                                 added.show();
                             }
                         });
