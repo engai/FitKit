@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Health Kit</string>
     <string name="action_settings">Settings</string>
+    <string name="add_calories">Add</string>
     <string name="hello_world">Hello World! This is my app</string>
     <string name="user_profile">User Profile</string>
     <string name="calorie_counter">Calorie Counter</string>
