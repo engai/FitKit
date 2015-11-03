@@ -42,17 +42,5 @@ public class dataHolder {
         }
         return instance;
     }
-    /*
-    private double heightInput;
-    private double globalBMI =0;
 
-    public double getWeightInput() {return weightInput;}
-    public void setWeightInput(double weightData) {this.weightInput = weightData;}
-
-    public double getHeightInput() {return heightInput;}
-    public void setHeightInput(double heightData) {this.heightInput = heightData;}
-
-    public double getGlobalBMI() {return globalBMI;}
-    public void setGlobalBMI(double bmiData) {this.globalBMI = bmiData;}
-    */
 }
