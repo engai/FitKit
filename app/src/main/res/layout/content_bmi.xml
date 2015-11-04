@@ -13,10 +13,88 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="BMI"
-        android:id="@+id/textView5"
+        android:id="@+id/resultOut"
+        android:clickable="false"
+        android:textColor="#93cfdb"
+        android:textAlignment="center"
+        android:textSize="150sp"
+        android:singleLine="false"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:text="BMI" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Weight (in pounds)"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/resultOut"
+        android:layout_centerHorizontal="true"
+        android:textColor="#c9fbfc" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Height (in inches)"
+        android:id="@+id/textView8"
+        android:textColor="#c9fbfc"
+        android:layout_below="@+id/userWeight"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_alignStart="@+id/textView5" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/userWeight"
+        android:layout_below="@+id/textView5"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:singleLine="false" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/userHeight"
+        android:layout_below="@+id/textView8"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
         android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Age (in years)"
+        android:id="@+id/textView9"
+        android:textColor="#c9fbfc"
+        android:layout_below="@+id/userHeight"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/userAge"
+        android:layout_below="@+id/textView9"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculate BMI"
+        android:id="@+id/BMIbutton"
+        android:layout_below="@+id/userAge"
+        android:layout_centerHorizontal="true"
+        android:onClick="runBMI" />
+
 </RelativeLayout>
