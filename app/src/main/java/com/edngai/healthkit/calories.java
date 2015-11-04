@@ -73,35 +73,7 @@ public class calories extends AppCompatActivity {
         getSupportActionBar().setTitle("Calories");
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-
-        final List<String> caloriesArray = new ArrayList<String>();
-        final List<String> amountArray = new ArrayList<String>();
-        ParseQuery query = new ParseQuery("Calories");
-
-        query.orderByDescending("createdAt");
-        query.setLimit(7);
-
-        query.findInBackground(new FindCallback<ParseObject>() {
-
-            @Override
-            public void done(List<ParseObject> caloriesList, ParseException e) {
-
-                if (e == null) {
-
-
-                    for (ParseObject foodItem : caloriesList) {
-                        caloriesArray.add((String) foodItem.get("food"));
-                        amountArray.add((String) foodItem.get("calories"));
-                    }
-
-                    displayToList(caloriesArray, amountArray);
-
-                } else {
-                    //Log.d("Error with calorie retrieval", "Error: " + e.getMessage());
-                }
-            }
-        });
-
+        displayToList();
 
     }
 
@@ -168,8 +140,8 @@ public class calories extends AppCompatActivity {
                         addCalories.setTitle("Confirm");
                         addCalories.setMessage("Are you sure this is correct?");
                         //some code to display food item and calories in the dialog!!!
-                        addCalories.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog, int which){
+                        addCalories.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
                                 //IMPLEMENT SAVING OF INFO HERE!!!
                                 //!!!
                                 //!!!
@@ -186,10 +158,12 @@ public class calories extends AppCompatActivity {
                                 Toast added = Toast.makeText(getApplicationContext(),
                                         food + " added!", Toast.LENGTH_SHORT);
                                 added.show();
+
+                                displayToList();
                             }
                         });
-                        addCalories.setNegativeButton("No", new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog, int which){
+                        addCalories.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
                             }
                         });
@@ -209,27 +183,54 @@ public class calories extends AppCompatActivity {
         alert.show();
     }
 
-    public void displayToList(List<String> caloriesArray, List<String> amountArray){
-        //Convert from lists to arrays
-        String[] finalCaloriesArray = new String[caloriesArray.size()];
-        caloriesArray.toArray(finalCaloriesArray);
+    public void displayToList(){
+        final List<String> caloriesArray = new ArrayList<String>();
+        final List<String> amountArray = new ArrayList<String>();
+        ParseQuery query = new ParseQuery("Calories");
 
-        String[] finalAmountArray = new String[amountArray.size()];
-        amountArray.toArray(finalAmountArray);
+        query.orderByDescending("createdAt");
+        query.setLimit(7);
 
-        //Create a map to pass into ListView
-        List<Map<String,String>> data = new ArrayList<Map<String,String>>();
-        for(int i = 0; i < caloriesArray.size();i++){
-            Map<String, String> datamap = new HashMap<String, String>(2);
-            datamap.put("food", finalCaloriesArray[i]);
-            datamap.put("calories", finalAmountArray[i]);
-            data.add(datamap);
-        }
+        query.findInBackground(new FindCallback<ParseObject>() {
 
-        //Create Simple Adapter to display Item and subitem
-        SimpleAdapter adapter = new SimpleAdapter(calories.this, data, android.R.layout.simple_list_item_2,
-                new String[] {"food","calories"}, new int[] {android.R.id.text1, android.R.id.text2});
-        ListView listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(adapter);
+            @Override
+            public void done(List<ParseObject> caloriesList, ParseException e) {
+
+                if (e == null) {
+
+
+                    for (ParseObject foodItem : caloriesList) {
+                        caloriesArray.add((String) foodItem.get("food"));
+                        amountArray.add((String) foodItem.get("calories"));
+                    }
+
+                    //Convert from lists to arrays
+                    String[] finalCaloriesArray = new String[caloriesArray.size()];
+                    caloriesArray.toArray(finalCaloriesArray);
+
+                    String[] finalAmountArray = new String[amountArray.size()];
+                    amountArray.toArray(finalAmountArray);
+
+                    //Create a map to pass into ListView
+                    List<Map<String,String>> data = new ArrayList<Map<String,String>>();
+                    for(int i = 0; i < caloriesArray.size();i++){
+                        Map<String, String> datamap = new HashMap<String, String>(2);
+                        datamap.put("food", finalCaloriesArray[i]);
+                        datamap.put("calories", finalAmountArray[i]);
+                        data.add(datamap);
+                    }
+
+                    //Create Simple Adapter to display Item and subitem
+                    SimpleAdapter adapter = new SimpleAdapter(calories.this, data, android.R.layout.simple_list_item_2,
+                            new String[] {"food","calories"}, new int[] {android.R.id.text1, android.R.id.text2});
+                    ListView listView = (ListView) findViewById(R.id.listView);
+                    listView.setAdapter(adapter);
+
+                } else {
+                    //Log.d("Error with calorie retrieval", "Error: " + e.getMessage());
+                }
+            }
+        });
+
     }
 }
