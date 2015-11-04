@@ -9,6 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+<<<<<<< HEAD
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+=======
 import android.widget.Toast;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,6 +30,7 @@ import com.parse.ParseObject;
 
 //Crystal: I commented out some stuff just in case things go wrong
 //I know what the original code looked like; we can clean up later!
+>>>>>>> 52e1ea53189914cf53aef6a201de713605b9057d
 
 public class calories extends AppCompatActivity {
 
@@ -37,6 +42,13 @@ public class calories extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+<<<<<<< HEAD
+        String[] days = {"Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, days);
+        ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+
+=======
     }*/
 
     private Toolbar toolbar;                              // Declaring the Toolbar Object
@@ -97,6 +109,7 @@ public class calories extends AppCompatActivity {
         }
 
         return true;
+>>>>>>> 52e1ea53189914cf53aef6a201de713605b9057d
     }
 
     private TextView resultText;
