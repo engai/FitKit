@@ -5,12 +5,19 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
         <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.4" />
         <option name="gradleJvm" value="1.7" />
+=======
+        <option name="gradleHome" value="C:\Program Files\Android\Android Studio\gradle\gradle-2.4" />
+        <option name="gradleJvm" value="1.8" />
+>>>>>>> 52e1ea53189914cf53aef6a201de713605b9057d
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Parse-1.10.3" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/bolts-android-1.2.1" />
           </set>
         </option>
       </GradleProjectSettings>
