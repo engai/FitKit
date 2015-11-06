@@ -21,7 +21,7 @@
         android:singleLine="false"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="BMI" />
+        android:text="" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,34 +67,13 @@
         android:textAlignment="center"
         android:textColor="#ffffff" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Age (in years)"
-        android:id="@+id/textView9"
-        android:textColor="#c9fbfc"
-        android:layout_below="@+id/userHeight"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/userAge"
-        android:layout_below="@+id/textView9"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:textColor="#ffffff" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Calculate BMI"
         android:id="@+id/BMIbutton"
-        android:layout_below="@+id/userAge"
         android:layout_centerHorizontal="true"
-        android:onClick="runBMI" />
+        android:onClick="runBMI"
+        android:layout_below="@+id/userHeight" />
 
 </RelativeLayout>

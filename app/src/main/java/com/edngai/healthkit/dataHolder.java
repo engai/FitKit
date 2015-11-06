@@ -16,9 +16,7 @@ public class dataHolder {
         dataHolder.weightInput = t;
     }
 
-    public double getWeightInput(){
-        return dataHolder.weightInput;
-    }
+    public double getWeightInput(){ return dataHolder.weightInput; }
 
     public void setHeightInput(double t){
         dataHolder.heightInput = t;

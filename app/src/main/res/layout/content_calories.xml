@@ -9,32 +9,12 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_calories" tools:context="com.edngai.healthkit.calories">
 
-<<<<<<< HEAD
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
-=======
-    <!--
-    <include
-        layout="@layout/tool_bar"
-        android:layout_below="@+id/textView7"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"></include>
-    -->
 
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="WHERE MY CALORIES BE AT THO"
-        android:id="@+id/textView7"
-        android:textColor="#ffffff"
+        android:id="@+id/listView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="70dp" />
-
->>>>>>> 52e1ea53189914cf53aef6a201de713605b9057d
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
