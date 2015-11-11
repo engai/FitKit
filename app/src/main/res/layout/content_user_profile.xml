@@ -13,10 +13,115 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="40sp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/user_profile"
         android:id="@+id/user"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff" />
+
+    <!--> BMI title</-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView10"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:clickable="false"
+        android:textColor="#c9fbfc"
+        android:textAlignment="center"
+        android:singleLine="false"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/user"
+        android:text="BMI:" />
+
+    <!--> BMI global variable </-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/resultOut"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:clickable="false"
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:singleLine="false"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView10"
+        android:text="" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Weight (in pounds):"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/resultOut"
+        android:layout_centerHorizontal="true"
+        android:textColor="#c9fbfc" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Height (in inches):"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView8"
+        android:textColor="#c9fbfc"
+        android:layout_below="@+id/userWeight" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Age"
+        android:textAlignment="center"
+        android:id="@+id/textView9"
+        android:textColor="#c9fbfc"
+        android:layout_below="@+id/userHeight"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/userWeight"
+        android:layout_below="@+id/textView5"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:singleLine="false" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/userHeight"
+        android:layout_below="@+id/textView8"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/userAge"
+        android:layout_below="@+id/textView9"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UPDATE"
+        android:id="@+id/BMIbutton"
+        android:layout_centerHorizontal="true"
+        android:onClick="updateUser"
+        android:layout_below="@+id/userAge" />
+
+
 </RelativeLayout>
