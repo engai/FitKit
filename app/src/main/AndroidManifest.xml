@@ -37,7 +37,8 @@
         <activity
             android:name=".bmi"
             android:label="@string/title_activity_bmi"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" > <!-- hides soft keyboard upon opening -->
         </activity>
         <activity
             android:name=".tips"

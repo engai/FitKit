@@ -70,10 +70,20 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calculate BMI"
+        android:text="Calculate New BMI"
         android:id="@+id/BMIbutton"
         android:layout_centerHorizontal="true"
         android:onClick="runBMI"
         android:layout_below="@+id/userHeight" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/description"
+        android:textColor="#93cfdb"
+        android:layout_below="@+id/BMIbutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp" />
 
 </RelativeLayout>
