@@ -107,6 +107,30 @@ public class bmi extends AppCompatActivity {
     // called when onClick() is called on the Calculate BMI button
     public void runBMI(View v){
 
+        // check if text field weightIn are empty
+        if( (weightIn.getText().length() == 0) ){
+            weightIn.requestFocus();
+            weightIn.setError("FIELD CANNOT BE EMPTY");
+        }
+
+        // check if text field heightIn are empty
+        else if( (heightIn.getText().length() == 0) ){
+            heightIn.requestFocus();
+            heightIn.setError("FIELD CANNOT BE EMPTY");
+        }
+
+        // check if text field weightIn is too large
+        else if ( (weightIn.getText().length() > 3) ) {
+            weightIn.requestFocus();
+            weightIn.setError("WEIGHT TOO LARGE");
+        }
+
+        // check if text field heightIn is too large
+        else if ( (heightIn.getText().length() > 3) ) {
+            heightIn.requestFocus();
+            heightIn.setError("HEIGHT TOO LARGE");
+        }
+/*
         // for user checks
         AlertDialog.Builder builder1;
         builder1 = new AlertDialog.Builder(this);
@@ -127,6 +151,7 @@ public class bmi extends AppCompatActivity {
             alert11.show();
         }
 
+
         // check for crazy user input (weight is over 3 digits long, height is over 3 digits long)
         else if ( (weightIn.getText().length() > 3 ) || (heightIn.getText().length() > 3) ){
             builder1.setMessage("Are you sure that is the correct weight/height?");
@@ -142,6 +167,7 @@ public class bmi extends AppCompatActivity {
             AlertDialog alert11 = builder1.create();
             alert11.show();
         }
+*/
 
         // user has inputted data
         else {
