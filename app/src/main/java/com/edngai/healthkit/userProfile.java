@@ -21,6 +21,7 @@ public class userProfile extends AppCompatActivity {
     private TextView resultBMI;
     private EditText weightIn, heightIn, ageIn;
     private double result;
+    private int w, h, a;
     private String resultString, wString, hString, aString;
     dataHolder g = dataHolder.getInstance();
 
@@ -47,23 +48,63 @@ public class userProfile extends AppCompatActivity {
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject user, ParseException e) {
                 if (user == null) {
-                    // no data in user's bmi/info. so, just print 0, the default
                     resultString = String.format("%.2f", result);
-                    wString = "0";
-                    hString = "0";
-                    aString = "0";
                     displayBMI();
                     displayInfo();
                 } else {
-                    // latest object returned in userBMI. Now, get the bmi. Set the bmi as global.
                     result = (double) user.get("userBMI");
-                    g.setResultInput(result);
                     resultString = String.format("%.2f", result);
-                    // set weight, height, age Strings for display
-                    wString = String.format("%f", g.getWeightInput());
-                    hString = String.format("%f", g.getHeightInput());
-                    aString = String.format("%f", g.getAgeInput());
-                    //displayInfo
+                    displayBMI();
+                    displayInfo();
+                }
+            }
+        });
+
+        ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Weight");
+        query2.orderByDescending("createdAt");
+        query2.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+                    wString = String.format("%d", w);
+                    displayBMI();
+                    displayInfo();
+                } else {
+                    w = (int) user.get("pounds");
+                    wString = String.format("%d", w);
+                    displayBMI();
+                    displayInfo();
+                }
+            }
+        });
+
+        ParseQuery<ParseObject> query3 = ParseQuery.getQuery("Height");
+        query3.orderByDescending("createdAt");
+        query3.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+                    hString = String.format("%d", h);
+                    displayBMI();
+                    displayInfo();
+                } else {
+                    h = (int) user.get("inches");
+                    hString = String.format("%d", h);
+                    displayBMI();
+                    displayInfo();
+                }
+            }
+        });
+
+        ParseQuery<ParseObject> query4 = ParseQuery.getQuery("Age");
+        query4.orderByDescending("createdAt");
+        query4.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+                    aString = String.format("%d", a);
+                    displayBMI();
+                    displayInfo();
+                } else {
+                    a = (int) user.get("userAge");
+                    aString = String.format("%d", a);
                     displayBMI();
                     displayInfo();
                 }
