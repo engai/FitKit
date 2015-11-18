@@ -9,6 +9,7 @@ public class dataHolder {
     private static double weightInput;
     private static double heightInput;
     private static double resultInput;
+    private static double ageInput;
 
     private dataHolder(){}
 
@@ -33,6 +34,10 @@ public class dataHolder {
     public double getResultInput(){
         return dataHolder.resultInput;
     }
+
+    public void setAgeInput(double a) { dataHolder.ageInput = a; }
+
+    public double getAgeInput() { return dataHolder.ageInput; }
 
     public static synchronized dataHolder getInstance(){
         if (instance == null){
