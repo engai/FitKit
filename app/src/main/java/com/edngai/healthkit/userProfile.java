@@ -31,6 +31,7 @@ public class userProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Profile");
         initializeApp();
     }
 
@@ -165,24 +166,63 @@ public class userProfile extends AppCompatActivity {
     // called when onClick() is called on the UPDATE button
     public void updateUser(View v){
 
-        // local variables to hold the weight and height as strings
-        double weight = Double.parseDouble(weightIn.getText().toString());
-        double height = Double.parseDouble( heightIn.getText().toString() );
-        // local variable to hold age as string
-        double age = Double.parseDouble(ageIn.getText().toString());
 
-        // find the result and display that result bmi
-        // also update age (put it in the calculateBMI method)
-        result = calculateBMI(weight, height, age);
-        resultString = String.format("%.2f", result);
-        // set weight, height, age Strings for display
-        wString = String.format("%f", g.getWeightInput());
-        hString = String.format("%f", g.getHeightInput());
-        aString = String.format("%f", g.getAgeInput());
-        displayBMI();
-        displayInfo();
-        //Taking out confirmBMI because that popup will happen in BMI page
-        //confirmBMI();
+        // check if text field weightIn are empty
+        if( (weightIn.getText().length() == 0) ){
+            weightIn.requestFocus();
+            weightIn.setError("FIELD CANNOT BE EMPTY");
+        }
+
+        // check if text field heightIn are empty
+        else if( (heightIn.getText().length() == 0) ){
+            heightIn.requestFocus();
+            heightIn.setError("FIELD CANNOT BE EMPTY");
+        }
+
+        // check if text field ageIn are empty
+        else if( (ageIn.getText().length() == 0) ){
+            ageIn.requestFocus();
+            ageIn.setError("FIELD CANNOT BE EMPTY");
+        }
+
+        // check if text field weightIn is too large
+        else if ( (weightIn.getText().length() > 3) ) {
+            weightIn.requestFocus();
+            weightIn.setError("WEIGHT TOO LARGE");
+        }
+
+        // check if text field heightIn is too large
+        else if ( (heightIn.getText().length() > 3) ) {
+            heightIn.requestFocus();
+            heightIn.setError("HEIGHT TOO LARGE");
+        }
+
+        // check if text field ageIn is too large
+        else if ( (ageIn.getText().length() > 3) ) {
+            ageIn.requestFocus();
+            ageIn.setError("HEIGHT TOO LARGE");
+        }
+
+        else {
+            // local variables to hold the weight and height as strings
+            double weight = Double.parseDouble(weightIn.getText().toString());
+            double height = Double.parseDouble(heightIn.getText().toString());
+            // local variable to hold age as string
+            double age = Double.parseDouble(ageIn.getText().toString());
+
+            // find the result and display that result bmi
+            // also update age (put it in the calculateBMI method)
+            result = calculateBMI(weight, height, age);
+            resultString = String.format("%.2f", result);
+            // set weight, height, age Strings for display
+            wString = String.format("%f", g.getWeightInput());
+            hString = String.format("%f", g.getHeightInput());
+            aString = String.format("%f", g.getAgeInput());
+            displayBMI();
+            displayInfo();
+            //Taking out confirmBMI because that popup will happen in BMI page
+            //confirmBMI();
+        }
 
     }
 
