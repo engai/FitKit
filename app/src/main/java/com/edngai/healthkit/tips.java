@@ -24,6 +24,7 @@ public class tips extends AppCompatActivity {
         setContentView(R.layout.activity_tips);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Tips");
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Tips");
         query.findInBackground(new FindCallback<ParseObject>() {
