@@ -21,7 +21,6 @@
         android:textAlignment="center"
         android:singleLine="false"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/user"
         android:text="BMI:" />
 
     <!--> BMI global variable </-->
