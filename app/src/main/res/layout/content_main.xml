@@ -113,8 +113,17 @@
         android:layout_height="wrap_content"
         android:text="Settings"
         android:id="@+id/settingsButton"
-        android:layout_below="@+id/textView3"
+        android:layout_marginBottom="54dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daily Summary"
+        android:id="@+id/summaryButton"
+        android:layout_above="@+id/settingsButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp" />
+        android:onClick="clickSummary" />
 
 </RelativeLayout>

@@ -1,7 +1,9 @@
 package com.edngai.healthkit;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,10 +12,16 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.parse.GetCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    String goalStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("FitKit");
 
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
@@ -106,12 +115,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+    */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -135,6 +146,37 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void clickSummary(View view){
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("CalorieGoal");
+        query.orderByDescending("createdAt");
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+
+                } else {
+                    int goal = (int)user.get("caloriesGoal");
+                    goalStr = Integer.toString(goal);
+                }
+            }
+        });
+
+        AlertDialog.Builder builder1;
+        builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("You have inputted a total of (daily calories here) out of " + goalStr);
+
+        builder1.setCancelable(true);
+        builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
 
 
 

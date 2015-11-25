@@ -19,9 +19,9 @@ import com.parse.ParseQuery;
 public class userProfile extends AppCompatActivity {
 
     private TextView resultBMI;
-    private EditText weightIn, heightIn, ageIn;
+    private EditText weightIn, heightIn, ageIn, goalIn;
     private double result;
-    private String resultString, wString, hString, aString;
+    private String resultString, wString, hString, aString, gString;
     dataHolder g = dataHolder.getInstance();
 
     @Override
@@ -30,6 +30,7 @@ public class userProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Profile");
         initializeApp();
     }
 
@@ -39,7 +40,7 @@ public class userProfile extends AppCompatActivity {
         weightIn = (EditText) findViewById(R.id.userWeight);
         heightIn = (EditText) findViewById(R.id.userHeight);
         resultBMI = (TextView) findViewById(R.id.resultOut);
-
+        goalIn = (EditText) findViewById(R.id.userGoal);
         // get the latest created object's bmi & info
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("BMI");
@@ -52,6 +53,7 @@ public class userProfile extends AppCompatActivity {
                     wString = "0";
                     hString = "0";
                     aString = "0";
+                    gString = "0";
                     displayBMI();
                     displayInfo();
                 } else {
@@ -63,6 +65,7 @@ public class userProfile extends AppCompatActivity {
                     wString = String.format("%f", g.getWeightInput());
                     hString = String.format("%f", g.getHeightInput());
                     aString = String.format("%f", g.getAgeInput());
+                    gString = String.format("%f", gString);
                     //displayInfo
                     displayBMI();
                     displayInfo();
@@ -81,6 +84,7 @@ public class userProfile extends AppCompatActivity {
         weightIn.setText(wString, TextView.BufferType.EDITABLE);
         heightIn.setText(hString, TextView.BufferType.EDITABLE);
         ageIn.setText(aString, TextView.BufferType.EDITABLE);
+        goalIn.setText(gString, TextView.BufferType.EDITABLE);
     }
 
 
@@ -90,7 +94,7 @@ public class userProfile extends AppCompatActivity {
      * result. It returns the resulting bmi.
      *
      */
-    public double calculateBMI( double w, double h, double a){
+    public double calculateBMI( double w, double h, double a, double goals){
         double bmi;
         bmi = (w / (h * h)) *703.0;
 
@@ -99,23 +103,27 @@ public class userProfile extends AppCompatActivity {
         ParseObject heightObject = new ParseObject("Height");
         ParseObject bmiObject = new ParseObject("BMI");
         ParseObject ageObject = new ParseObject("Age");
+        ParseObject goalObject = new ParseObject("CalorieGoal");
 
         /* Store updated info into parse */
         weightObject.put("pounds", w);
         heightObject.put("inches", h);
         bmiObject.put("userBMI", bmi);
         ageObject.put("userAge", a);
+        goalObject.put("caloriesGoal", goals);
 
         weightObject.saveInBackground();
         heightObject.saveInBackground();
         bmiObject.saveInBackground();
         ageObject.saveInBackground();
+        goalObject.saveInBackground();
 
         // set global variables to new weight, height, bmi and age
         g.setWeightInput(w);
         g.setHeightInput(h);
         g.setResultInput(bmi);
         g.setAgeInput(a);
+        g.setGoalInput(goals);
 
         // return the bmi
         return bmi;
@@ -129,15 +137,17 @@ public class userProfile extends AppCompatActivity {
         double height = Double.parseDouble( heightIn.getText().toString() );
         // local variable to hold age as string
         double age = Double.parseDouble(ageIn.getText().toString());
+        double goal = Double.parseDouble(goalIn.getText().toString());
 
         // find the result and display that result bmi
         // also update age (put it in the calculateBMI method)
-        result = calculateBMI(weight, height, age);
+        result = calculateBMI(weight, height, age, goal);
         resultString = String.format("%.2f", result);
         // set weight, height, age Strings for display
         wString = String.format("%f", g.getWeightInput());
         hString = String.format("%f", g.getHeightInput());
         aString = String.format("%f", g.getAgeInput());
+        gString = String.format("%f", g.getGoalInput());
         displayBMI();
         displayInfo();
         //Taking out confirmBMI because that popup will happen in BMI page
