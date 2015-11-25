@@ -2,11 +2,8 @@ package com.edngai.healthkit;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -102,6 +99,9 @@ public class dayCalories extends AppCompatActivity {
         for (int i = 0; i < calories.length; i++) {
             total = total + (Integer.parseInt(calories[i]));
         }
+
+        dataHolder g = dataHolder.getInstance();
+        g.setTotalInput(total* 1.0 );
 
         dailyCaloriesText.setText("Calories: " + Integer.toString(total), TextView.BufferType.NORMAL);
 
