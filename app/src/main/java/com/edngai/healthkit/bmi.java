@@ -143,6 +143,23 @@ public class bmi extends AppCompatActivity {
             alert11.show();
         }
 
+        // do not allow 0's
+        else if ( Double.parseDouble(weightIn.getText().toString()) == 0 || Double.parseDouble(heightIn.getText().toString()) == 0 ){
+            builder1.setMessage("Input cannot be 0");
+
+            builder1.setCancelable(true);
+            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+
+            // create and show the alert box
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
+        }
+
         // user has inputted data
         else {
             // local variables to hold the weight and height as strings
