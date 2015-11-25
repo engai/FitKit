@@ -110,6 +110,19 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("CalorieGoal");
+        query.orderByDescending("createdAt");
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+
+                } else {
+                    int goal = (int) user.get("caloriesGoal");
+                    goalStr = Integer.toString(goal);
+                }
+            }
+        });
     }
 
     /**
@@ -145,19 +158,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickSummary(View view){
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("CalorieGoal");
-        query.orderByDescending("createdAt");
-        query.getFirstInBackground(new GetCallback<ParseObject>() {
-            public void done(ParseObject user, ParseException e) {
-                if (user == null) {
-
-                } else {
-                    int goal = (int)user.get("caloriesGoal");
-                    goalStr = Integer.toString(goal);
-                }
-            }
-        });
 
         AlertDialog.Builder builder1;
         builder1 = new AlertDialog.Builder(this);
