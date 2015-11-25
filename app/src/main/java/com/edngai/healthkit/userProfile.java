@@ -27,6 +27,7 @@ public class userProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Profile");
         initializeApp();
     }
 
@@ -47,7 +48,6 @@ public class userProfile extends AppCompatActivity {
                 if (user == null) {
                     // print 0
                 } else {
-                    // latest object returned in userBMI. Now, get the bmi. Set the bmi as global.
                     result = (double) user.get("userBMI");
                     g.setResultInput(result);
                 }
@@ -175,6 +175,7 @@ public class userProfile extends AppCompatActivity {
 
     // called when onClick() is called on the UPDATE button
     public void updateUser(View v){
+
 
         // check if text field weightIn are empty
         if( (weightIn.getText().length() == 0) ){

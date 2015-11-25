@@ -19,7 +19,8 @@ public class bmi extends AppCompatActivity {
     private TextView resultBMI, meaning;
     private EditText weightIn, heightIn;
     private double result;
-    private String resultString;
+    private int w, h;
+    private String resultString, wString, hString;
     private String resultMeaning;
     dataHolder g = dataHolder.getInstance();
 
@@ -60,11 +61,44 @@ public class bmi extends AppCompatActivity {
                 }
             }
         });
+
+        ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Weight");
+        query2.orderByDescending("createdAt");
+        query2.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+              if (user == null) {
+                  wString = String.format("%d", w);
+                  displayBMI();
+              } else {
+                  w = (int) user.get("pounds");
+                  wString = String.format("%d", w);
+                  displayBMI();
+              }
+            }
+        });
+
+        ParseQuery<ParseObject> query3 = ParseQuery.getQuery("Height");
+        query3.orderByDescending("createdAt");
+        query3.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+                    hString = String.format("%d", h);
+                    displayBMI();
+                } else {
+                    h = (int) user.get("inches");
+                    hString = String.format("%d", h);
+                    displayBMI();
+                }
+            }
+        });
     }
 
     public void displayBMI(){
         // display the text
         resultBMI.setText(resultString, TextView.BufferType.NORMAL);
+
+        weightIn.setText(wString, TextView.BufferType.EDITABLE);
+        heightIn.setText(hString, TextView.BufferType.EDITABLE);
 
         resultMeaning = getMeaning();
         // display the bmi meaning
