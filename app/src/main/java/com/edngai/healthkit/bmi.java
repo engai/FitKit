@@ -77,7 +77,7 @@ public class bmi extends AppCompatActivity {
      * result. It returns the resulting bmi.
      *
      */
-    public double calculateBMI( double w, double h){
+    public double calculateBMI( int w, int h){
         double bmi;
         bmi = (w / (h * h)) *703.0;
 
@@ -130,50 +130,12 @@ public class bmi extends AppCompatActivity {
             heightIn.requestFocus();
             heightIn.setError("HEIGHT TOO LARGE");
         }
-/*
-        // for user checks
-        AlertDialog.Builder builder1;
-        builder1 = new AlertDialog.Builder(this);
-        // check if the user has inputted a new weight and height
-        if ( (weightIn.getText().length() == 0) || (heightIn.getText().length() == 0) ) {
-            // prompt user to input a weight and height
-            builder1.setMessage("Please enter in both a new weight and height to change your user information.");
-
-            builder1.setCancelable(true);
-            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-
-            // create and show the alert box
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-        }
-
-
-        // check for crazy user input (weight is over 3 digits long, height is over 3 digits long)
-        else if ( (weightIn.getText().length() > 3 ) || (heightIn.getText().length() > 3) ){
-            builder1.setMessage("Are you sure that is the correct weight/height?");
-
-            builder1.setCancelable(true);
-            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-
-            // create and show the alert box
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-        }
-*/
 
         // user has inputted data
         else {
             // local variables to hold the weight and height as strings
-            double weight = Double.parseDouble(weightIn.getText().toString());
-            double height = Double.parseDouble(heightIn.getText().toString());
+            int weight = Integer.parseInt(weightIn.getText().toString());
+            int height = Integer.parseInt(heightIn.getText().toString());
 
             // find the result and display that result bmi
             result = calculateBMI(weight, height);
@@ -227,6 +189,4 @@ public class bmi extends AppCompatActivity {
         resultMeaning = message;
         return message;
     }
-
-
 }

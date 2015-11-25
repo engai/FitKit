@@ -10,6 +10,49 @@
     tools:showIn="@layout/activity_settings" tools:context="com.edngai.healthkit.Settings"
     android:background="@color/background_material_dark">
 
+    <TextView
+        android:id="@+id/alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:clickable="false"
+        android:textColor="#c9fbfc"
+        android:textAlignment="center"
+        android:singleLine="false"
+        android:layout_centerHorizontal="true"
+        android:text="DAILY REMINDER:" />
+
+    <TextView
+        android:id="@+id/alarmToggle"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:clickable="false"
+        android:textColor="#c9fbfc"
+        android:textAlignment="center"
+        android:singleLine="false"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/alarm"
+        android:text="OFF" />
+
+    <Button
+        android:id="@+id/setAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/alarmToggle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:onClick="onClickSetAlarm"
+        android:text="REMINDER ON/OFF" />
+
+    <!--Take out after testing reminder</-->
+    <TextView
+        android:id="@+id/TextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/setAlarm"
+        android:text="Android Alarm Example:\n\rSetup an alarm event after 10 seconds from the current time. So just press Setup Alarm button and wait for 10 seconds. You can see a toast message when your alarm time will be reach." />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,4 +61,5 @@
         android:layout_marginBottom="67dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

@@ -119,9 +119,32 @@
         android:layout_height="wrap_content"
         android:text="UPDATE"
         android:id="@+id/BMIbutton"
-        android:layout_centerHorizontal="true"
         android:onClick="updateUser"
-        android:layout_below="@+id/userAge" />
+        android:layout_below="@+id/userAge"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Your Daily Calories Goal"
+        android:textAlignment="center"
+        android:id="@+id/textView7"
+        android:textColor="#c9fbfc"
+        android:layout_below="@+id/userAge"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/userGoal"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/textView7"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
