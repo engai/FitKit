@@ -27,6 +27,7 @@ public class tips extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Tips");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Tips");
         query.findInBackground(new FindCallback<ParseObject>() {

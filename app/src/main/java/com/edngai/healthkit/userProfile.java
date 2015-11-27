@@ -33,6 +33,7 @@ public class userProfile extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Profile");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initializeApp();
     }
 
@@ -132,85 +133,81 @@ public class userProfile extends AppCompatActivity {
     }
 
     // called when onClick() is called on the UPDATE button
-    public void updateUser(View v){
+    public void updateUser(View v) {
         
-        // for user checks
-        AlertDialog.Builder builder1;
-        builder1 = new AlertDialog.Builder(this);
-        // check if the user has inputted a new weight and height and age
-        if ( (weightIn.getText().length() == 0) || (heightIn.getText().length() == 0) || (ageIn.getText().length() == 0) ) {
-            // prompt user to input a weight and height and age
-            builder1.setMessage("Please enter in new values to change your user information.");
+            // for user checks
+            AlertDialog.Builder builder1;
+            builder1 = new AlertDialog.Builder(this);
+            // check if the user has inputted a new weight and height and age
+            if ((weightIn.getText().length() == 0) || (heightIn.getText().length() == 0) || (ageIn.getText().length() == 0)) {
+                // prompt user to input a weight and height and age
+                builder1.setMessage("Please enter in new values to change your user information.");
 
-            builder1.setCancelable(true);
-            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
+                builder1.setCancelable(true);
+                builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
 
-            // create and show the alert box
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
+                // create and show the alert box
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+            // check for crazy user input (weight is over 3 digits long, height is over 3 digits long, same w age)
+            else if ((weightIn.getText().length() > 3) || (heightIn.getText().length() > 3) || (ageIn.getText().length() > 3)) {
+                builder1.setMessage("Are you sure that is the correct weight/height/age?");
+
+                builder1.setCancelable(true);
+                builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+                // create and show the alert box
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+            // do not allow 0's
+            else if (Double.parseDouble(ageIn.getText().toString()) == 0 || Double.parseDouble(weightIn.getText().toString()) == 0 || Double.parseDouble(heightIn.getText().toString()) == 0) {
+                builder1.setMessage("Input cannot be 0");
+
+                builder1.setCancelable(true);
+                builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+                // create and show the alert box
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+            } else {
+
+                // local variables to hold the weight and height as strings
+                double weight = Double.parseDouble(weightIn.getText().toString());
+                double height = Double.parseDouble(heightIn.getText().toString());
+                // local variable to hold age as string
+                double age = Double.parseDouble(ageIn.getText().toString());
+                double goal = Double.parseDouble(goalIn.getText().toString());
+
+                // find the result and display that result bmi
+                // also update age (put it in the calculateBMI method)
+                result = calculateBMI(weight, height, age, goal);
+                resultString = String.format("%.2f", result);
+                // set weight, height, age Strings for display
+                wString = String.format("%f", g.getWeightInput());
+                hString = String.format("%f", g.getHeightInput());
+                aString = String.format("%f", g.getAgeInput());
+                gString = String.format("%f", g.getGoalInput());
+                displayBMI();
+                displayInfo();
+                //Taking out confirmBMI because that popup will happen in BMI page
+                //confirmBMI();
+            }
         }
-
-        // check for crazy user input (weight is over 3 digits long, height is over 3 digits long, same w age)
-        else if ( (weightIn.getText().length() > 3 ) || (heightIn.getText().length() > 3) || (ageIn.getText().length() > 3) ){
-            builder1.setMessage("Are you sure that is the correct weight/height/age?");
-
-            builder1.setCancelable(true);
-            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-
-            // create and show the alert box
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-        }
-
-        // do not allow 0's
-        else if ( Double.parseDouble(ageIn.getText().toString()) == 0 || Double.parseDouble(weightIn.getText().toString()) == 0 || Double.parseDouble(heightIn.getText().toString()) == 0 ){
-            builder1.setMessage("Input cannot be 0");
-
-            builder1.setCancelable(true);
-            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-
-            // create and show the alert box
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-
-        }
-
-        else {
-
-            // local variables to hold the weight and height as strings
-            double weight = Double.parseDouble(weightIn.getText().toString());
-            double height = Double.parseDouble(heightIn.getText().toString());
-            // local variable to hold age as string
-            double age = Double.parseDouble(ageIn.getText().toString());
-            double goal = Double.parseDouble(goalIn.getText().toString());
-
-            // find the result and display that result bmi
-            // also update age (put it in the calculateBMI method)
-            result = calculateBMI(weight, height, age, goal);
-            resultString = String.format("%.2f", result);
-            // set weight, height, age Strings for display
-            wString = String.format("%f", g.getWeightInput());
-            hString = String.format("%f", g.getHeightInput());
-            aString = String.format("%f", g.getAgeInput());
-            gString = String.format("%f", g.getGoalInput());
-            displayBMI();
-            displayInfo();
-            //Taking out confirmBMI because that popup will happen in BMI page
-            //confirmBMI();
-        }
-    }
 
     // A Pop Up Box Opens indicating what you bmi means
     public void confirmBMI(){

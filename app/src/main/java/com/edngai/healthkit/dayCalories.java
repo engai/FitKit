@@ -33,6 +33,7 @@ public class dayCalories extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Daily Calories");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Intent i = getIntent();
         positionClicked = i.getIntExtra("position", 0) + 1;
