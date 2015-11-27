@@ -157,11 +157,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // displays the daily summary
     public void clickSummary(View view){
+
+        dataHolder g = dataHolder.getInstance();
 
         AlertDialog.Builder builder1;
         builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("You have inputted a total of (daily calories here) out of " + goalStr);
+        builder1.setMessage("You have inputted a total of " + g.getTotalInput() + " out of " + goalStr);
 
         builder1.setCancelable(true);
         builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
