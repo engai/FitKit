@@ -24,6 +24,7 @@
         android:id="@+id/edittext2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
         android:hint="Enter amount of calories here"
         android:padding="10dp" />
 </LinearLayout>
