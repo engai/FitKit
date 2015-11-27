@@ -20,7 +20,8 @@ public class bmi extends AppCompatActivity {
     private TextView resultBMI, meaning;
     private EditText weightIn, heightIn;
     private double result;
-    private String resultString;
+    private int weight, height;
+    private String resultString, wString, hString;
     private String resultMeaning;
     dataHolder g = dataHolder.getInstance();
 
@@ -63,11 +64,51 @@ public class bmi extends AppCompatActivity {
                 }
             }
         });
+
+        ParseQuery<ParseObject> query1 = ParseQuery.getQuery("Weight");
+        query1.orderByDescending("createdAt");
+        query1.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+                    // no data in user's bmi. so, just print 0, the default
+                    wString = String.format("%d", weight);
+                    displayBMI();
+
+                } else {
+                    // latest object returned in userBMI. Now, get the bmi. Set the bmi as global.
+                    weight = (int) user.get("pounds");
+                    // g.setResultInput(result);
+                    wString = String.format("%d", weight);
+                    displayBMI();
+                }
+            }
+        });
+
+        ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Height");
+        query2.orderByDescending("createdAt");
+        query2.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+                    // no data in user's bmi. so, just print 0, the default
+                    hString = String.format("%d", height);
+                    displayBMI();
+
+                } else {
+                    // latest object returned in userBMI. Now, get the bmi. Set the bmi as global.
+                    height = (int) user.get("inches");
+                    // g.setResultInput(result);
+                    hString = String.format("%d", height);
+                    displayBMI();
+                }
+            }
+        });
     }
 
     public void displayBMI(){
         // display the text
         resultBMI.setText(resultString, TextView.BufferType.NORMAL);
+        weightIn.setText(wString, TextView.BufferType.EDITABLE);
+        heightIn.setText(hString, TextView.BufferType.EDITABLE);
 
         resultMeaning = getMeaning();
         // display the bmi meaning

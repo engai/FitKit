@@ -22,6 +22,7 @@ public class userProfile extends AppCompatActivity {
     private TextView resultBMI;
     private EditText weightIn, heightIn, ageIn, goalIn;
     private double result;
+    private int weight, height, age, goal;
     private String resultString, wString, hString, aString, gString;
     dataHolder g = dataHolder.getInstance();
 
@@ -53,22 +54,92 @@ public class userProfile extends AppCompatActivity {
                 if (user == null) {
                     // no data in user's bmi/info. so, just print 0, the default
                     resultString = String.format("%.2f", result);
-                    wString = "0";
-                    hString = "0";
-                    aString = "0";
-                    gString = "0";
                     displayBMI();
                     displayInfo();
                 } else {
                     // latest object returned in userBMI. Now, get the bmi. Set the bmi as global.
                     result = (double) user.get("userBMI");
-                    g.setResultInput(result);
                     resultString = String.format("%.2f", result);
-                    // set weight, height, age Strings for display
-                    wString = String.format("%f", g.getWeightInput());
-                    hString = String.format("%f", g.getHeightInput());
-                    aString = String.format("%f", g.getAgeInput());
-                    gString = String.format("%f", gString);
+                    //displayInfo
+                    displayBMI();
+                    displayInfo();
+                }
+            }
+        });
+
+        ParseQuery<ParseObject> query1 = ParseQuery.getQuery("Weight");
+        query1.orderByDescending("createdAt");
+        query1.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+                    // no data in user's bmi/info. so, just print 0, the default
+                    wString = String.format("%d", weight);
+                    displayBMI();
+                    displayInfo();
+                } else {
+                    // latest object returned in userBMI. Now, get the bmi. Set the bmi as global.
+                    weight = (int) user.get("pounds");
+                    wString = String.format("%d", weight);
+                    //displayInfo
+                    displayBMI();
+                    displayInfo();
+                }
+            }
+        });
+
+        ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Height");
+        query2.orderByDescending("createdAt");
+        query2.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+                    // no data in user's bmi/info. so, just print 0, the default
+                    hString = String.format("%d", height);
+                    displayBMI();
+                    displayInfo();
+                } else {
+                    // latest object returned in userBMI. Now, get the bmi. Set the bmi as global.
+                    height = (int) user.get("inches");
+                    hString = String.format("%d", height);
+                    //displayInfo
+                    displayBMI();
+                    displayInfo();
+                }
+            }
+        });
+
+        ParseQuery<ParseObject> query3 = ParseQuery.getQuery("Age");
+        query3.orderByDescending("createdAt");
+        query3.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+                    // no data in user's bmi/info. so, just print 0, the default
+                    aString = String.format("%d", age);
+                    displayBMI();
+                    displayInfo();
+                } else {
+                    // latest object returned in userBMI. Now, get the bmi. Set the bmi as global.
+                    age = (int) user.get("userAge");
+                    aString = String.format("%d", age);
+                    //displayInfo
+                    displayBMI();
+                    displayInfo();
+                }
+            }
+        });
+
+        ParseQuery<ParseObject> query4 = ParseQuery.getQuery("CalorieGoal");
+        query4.orderByDescending("createdAt");
+        query4.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject user, ParseException e) {
+                if (user == null) {
+                    // no data in user's bmi/info. so, just print 0, the default
+                    gString = String.format("%d", goal);
+                    displayBMI();
+                    displayInfo();
+                } else {
+                    // latest object returned in userBMI. Now, get the bmi. Set the bmi as global.
+                    goal = (int) user.get("caloriesGoal");
+                    gString = String.format("%d", goal);
                     //displayInfo
                     displayBMI();
                     displayInfo();
