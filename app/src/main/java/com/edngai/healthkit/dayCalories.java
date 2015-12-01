@@ -10,7 +10,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -22,8 +21,9 @@ import java.util.Map;
 
 public class dayCalories extends AppCompatActivity {
 
-    int positionClicked, result;
+    int positionClicked, result, goal;
     private TextView dailyCaloriesText, dailyGoalText;
+    String goalString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,20 +111,10 @@ public class dayCalories extends AppCompatActivity {
     }
 
     public void displayGoal() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("CalorieGoal");
-        query.orderByDescending("createdAt");
-        query.getFirstInBackground(new GetCallback<ParseObject>() {
-            public void done(ParseObject user, ParseException e) {
-
-                // latest object returned in userBMI. Now, get the bmi. Set the bmi as global.
-                result = (int) user.get("caloriesGoal");
-
-            }
-
-        });
-
+        dataHolder g = dataHolder.getInstance();
+        goalString = Double.toString(g.getGoalInput());
         dailyGoalText = (TextView) findViewById(R.id.dailyGoal);
-        dailyGoalText.setText("Daily Goal: " + Integer.toString(2000));
+        dailyGoalText.setText("Daily Goal: " + goalString);
 
     }
 
