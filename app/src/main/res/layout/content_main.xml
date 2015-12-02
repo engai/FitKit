@@ -15,12 +15,10 @@
         android:id="@+id/userProfileButton"
         android:src="@drawable/user"
         android:background="@android:color/transparent"
+        android:layout_marginTop="137dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="39dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="52dp" />
+        android:layout_toLeftOf="@+id/settingsButton"
+        android:layout_toStartOf="@+id/settingsButton" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -29,8 +27,8 @@
         android:src="@drawable/calories"
         android:background="@android:color/transparent"
         android:layout_alignTop="@+id/userProfileButton"
-        android:layout_toRightOf="@+id/settingsButton"
-        android:layout_toEndOf="@+id/settingsButton" />
+        android:layout_alignLeft="@+id/tipsButton"
+        android:layout_alignStart="@+id/tipsButton" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -38,9 +36,10 @@
         android:id="@+id/bmiButton"
         android:src="@drawable/bmi"
         android:background="@android:color/transparent"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/textView"
         android:layout_alignLeft="@+id/userProfileButton"
-        android:layout_alignStart="@+id/userProfileButton" />
+        android:layout_alignStart="@+id/userProfileButton"
+        android:layout_marginTop="40dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -49,8 +48,8 @@
         android:src="@drawable/tips"
         android:background="@android:color/transparent"
         android:layout_alignTop="@+id/bmiButton"
-        android:layout_alignLeft="@+id/calorieCounterButton"
-        android:layout_alignStart="@+id/calorieCounterButton" />
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -59,12 +58,12 @@
         android:text="BMI"
         android:id="@+id/textView3"
         android:textColor="#ffffff"
+        android:gravity="center"
         android:layout_below="@+id/bmiButton"
+        android:layout_alignRight="@+id/userProfileButton"
+        android:layout_alignEnd="@+id/userProfileButton"
         android:layout_alignLeft="@+id/bmiButton"
-        android:layout_alignStart="@+id/bmiButton"
-        android:layout_toLeftOf="@+id/settingsButton"
-        android:layout_toStartOf="@+id/settingsButton"
-        android:gravity="center" />
+        android:layout_alignStart="@+id/bmiButton" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -72,27 +71,23 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Profile"
         android:id="@+id/textView"
-        android:layout_below="@+id/userProfileButton"
-        android:layout_alignLeft="@+id/userProfileButton"
-        android:layout_alignStart="@+id/userProfileButton"
         android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_below="@+id/userProfileButton"
         android:layout_toLeftOf="@+id/settingsButton"
-        android:layout_toStartOf="@+id/settingsButton"
-        android:gravity="center" />
+        android:layout_alignLeft="@+id/userProfileButton"
+        android:layout_alignStart="@+id/userProfileButton" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Calories"
+        android:text="  Calories"
         android:id="@+id/textView2"
         android:textColor="#ffffff"
         android:gravity="center"
-        android:layout_alignTop="@+id/textView"
-        android:layout_alignLeft="@+id/calorieCounterButton"
-        android:layout_alignStart="@+id/calorieCounterButton"
-        android:layout_alignRight="@+id/calorieCounterButton"
-        android:layout_alignEnd="@+id/calorieCounterButton" />
+        android:layout_below="@+id/calorieCounterButton"
+        android:layout_toRightOf="@+id/settingsButton" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -100,20 +95,19 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Tips"
         android:id="@+id/textView4"
-        android:layout_alignTop="@+id/textView3"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_below="@+id/tipsButton"
         android:layout_alignLeft="@+id/tipsButton"
         android:layout_alignStart="@+id/tipsButton"
-        android:textColor="#ffffff"
         android:layout_alignRight="@+id/tipsButton"
-        android:layout_alignEnd="@+id/tipsButton"
-        android:gravity="center" />
+        android:layout_alignEnd="@+id/tipsButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Settings"
         android:id="@+id/settingsButton"
-        android:layout_marginBottom="54dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -125,5 +119,13 @@
         android:layout_above="@+id/settingsButton"
         android:layout_centerHorizontal="true"
         android:onClick="clickSummary" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/fitkitlogo"
+        android:layout_above="@+id/calorieCounterButton" />
 
 </RelativeLayout>
