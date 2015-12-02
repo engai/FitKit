@@ -45,21 +45,4 @@
         android:onClick="onClickSetAlarm"
         android:text="REMINDER ON/OFF" />
 
-    <!--Take out after testing reminder</-->
-    <TextView
-        android:id="@+id/TextView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/setAlarm"
-        android:text="Android Alarm Example:\n\rSetup an alarm event after 10 seconds from the current time. So just press Setup Alarm button and wait for 10 seconds. You can see a toast message when your alarm time will be reach." />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:id="@+id/logoutButton"
-        android:layout_marginBottom="67dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
 </RelativeLayout>
