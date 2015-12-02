@@ -2,6 +2,7 @@ package com.edngai.healthkit;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,8 +38,8 @@ public class dayCalories extends AppCompatActivity {
 
         Intent i = getIntent();
         positionClicked = i.getIntExtra("position", 0) + 1;
-        displayToList();
         displayGoal();
+        displayToList();
 
     }
 
@@ -107,6 +108,11 @@ public class dayCalories extends AppCompatActivity {
         g.setTotalInput(total* 1.0 );
 
         dailyCaloriesText.setText("Calories: " + Integer.toString(total), TextView.BufferType.NORMAL);
+        if(total > (Double.parseDouble(goalString))){
+            dailyCaloriesText.setTextColor(Color.RED);
+        }
+        else
+            dailyCaloriesText.setTextColor(Color.GREEN);
 
     }
 
