@@ -24,6 +24,9 @@ public class bmi extends AppCompatActivity {
     private String resultString, wString, hString;
     private String resultMeaning;
     dataHolder g = dataHolder.getInstance();
+    private AlertDialog.Builder builder1;
+    AlertDialog alert11;
+    String message = "";
 
 
     @Override
@@ -152,12 +155,12 @@ public class bmi extends AppCompatActivity {
     public void runBMI(View v){
 
         // for user checks
-        AlertDialog.Builder builder1;
         builder1 = new AlertDialog.Builder(this);
         // check if the user has inputted a new weight and height
         if ( (weightIn.getText().length() == 0) || (heightIn.getText().length() == 0) ) {
             // prompt user to input a weight and height
-            builder1.setMessage("Please enter in both a new weight and height to change your user information.");
+            message = "Please enter in both a new weight and height to change your user information.";
+            builder1.setMessage(message);
 
             builder1.setCancelable(true);
             builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -167,13 +170,14 @@ public class bmi extends AppCompatActivity {
             });
 
             // create and show the alert box
-            AlertDialog alert11 = builder1.create();
+            alert11 = builder1.create();
             alert11.show();
         }
 
         // check for crazy user input (weight is over 3 digits long, height is over 3 digits long)
         else if ( (weightIn.getText().length() > 3 ) || (heightIn.getText().length() > 3) ){
-            builder1.setMessage("Are you sure that is the correct weight/height?");
+            message = "Are you sure that is the correct weight/height?";
+            builder1.setMessage(message);
 
             builder1.setCancelable(true);
             builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -183,13 +187,14 @@ public class bmi extends AppCompatActivity {
             });
 
             // create and show the alert box
-            AlertDialog alert11 = builder1.create();
+            alert11 = builder1.create();
             alert11.show();
         }
 
         // do not allow 0's
         else if ( Double.parseDouble(weightIn.getText().toString()) == 0 || Double.parseDouble(heightIn.getText().toString()) == 0 ){
-            builder1.setMessage("Input cannot be 0");
+            message = "Input cannot be 0";
+            builder1.setMessage(message);
 
             builder1.setCancelable(true);
             builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -199,7 +204,7 @@ public class bmi extends AppCompatActivity {
             });
 
             // create and show the alert box
-            AlertDialog alert11 = builder1.create();
+            alert11 = builder1.create();
             alert11.show();
 
         }
