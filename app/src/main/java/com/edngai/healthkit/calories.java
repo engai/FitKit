@@ -45,6 +45,8 @@ import java.util.Map;
 
 public class calories extends AppCompatActivity {
 
+    private EditText foodIn, calIn;
+
     public Hashtable<String, String> foods = new Hashtable<String, String>();
 
     public final static String ID_EXTRA = "com.edngai.healthkit._ID";
@@ -71,6 +73,9 @@ public class calories extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calories);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        foodIn = (EditText) findViewById(R.id.edittext);
+        calIn = (EditText) findViewById(R.id.edittext2);
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         if (toolbar != null) {
@@ -137,6 +142,8 @@ public class calories extends AppCompatActivity {
         final View promptView = layoutInflater.inflate(R.layout.add_calories, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(calories.this);
         alertDialogBuilder.setView(promptView);
+        final android.support.v7.app.AlertDialog.Builder builder1;
+        builder1 = new android.support.v7.app.AlertDialog.Builder(this);
 
         // setup a dialog window
         alertDialogBuilder.setCancelable(false)
@@ -145,40 +152,76 @@ public class calories extends AppCompatActivity {
                     // save entered food item and calories to local variables
                     // which will be used in onClick method below
                     public void onClick(DialogInterface dialog, int id) {
-                        AlertDialog.Builder addCalories = new AlertDialog.Builder(calories.this);
-                        addCalories.setTitle("Confirm");
-                        addCalories.setMessage("Are you sure this is correct?");
-                        //some code to display food item and calories in the dialog!!!
-                        addCalories.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                //IMPLEMENT SAVING OF INFO HERE!!!
-                                //!!!
-                                //!!!
 
-                                String food = ((EditText) promptView.findViewById(R.id.edittext)).getText().toString();
-                                String calories = ((EditText) promptView.findViewById(R.id.edittext2)).getText().toString();
-                                Calendar c = Calendar.getInstance();
-                                int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+                        String food = ((EditText) promptView.findViewById(R.id.edittext)).getText().toString();
+                        String calories = ((EditText) promptView.findViewById(R.id.edittext2)).getText().toString();
 
-                                ParseObject item = new ParseObject("Calories");
-                                item.put("food", food);
-                                item.put("calories", calories);
-                                item.put("dayOfWeek", dayOfWeek);
-                                item.saveInBackground();
+                        if (food.length() == 0) {
+                            //foodIn.requestFocus();
+                            builder1.setMessage("ERROR: INPUT CANNOT BE EMPTY");
 
-                                //Toast to show button works
-                                Toast added = Toast.makeText(getApplicationContext(),
-                                        food + " added!", Toast.LENGTH_SHORT);
-                                added.show();
+                            builder1.setCancelable(true);
+                            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
 
-                            }
-                        });
-                        addCalories.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                        addCalories.show();
+                            // create and show the alert box
+                            android.support.v7.app.AlertDialog alert11 = builder1.create();
+                            alert11.show();
+                        } else if (calories.length() == 0) {
+                            //calIn.requestFocus();
+                            //calIn.setError("CALORIE FIELD CANNOT BE EMPTY");
+                            builder1.setMessage("ERROR: INPUT CANNOT BE EMPTY");
+
+                            builder1.setCancelable(true);
+                            builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                            // create and show the alert box
+                            android.support.v7.app.AlertDialog alert11 = builder1.create();
+                            alert11.show();
+                        } else {
+
+                            AlertDialog.Builder addCalories = new AlertDialog.Builder(calories.this);
+                            addCalories.setTitle("Confirm");
+                            addCalories.setMessage("Are you sure this is correct?");
+                            //some code to display food item and calories in the dialog!!!
+                            addCalories.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //IMPLEMENT SAVING OF INFO HERE!!!
+                                    //!!!
+                                    //!!!
+
+                                    String food = ((EditText) promptView.findViewById(R.id.edittext)).getText().toString();
+                                    String calories = ((EditText) promptView.findViewById(R.id.edittext2)).getText().toString();
+                                    Calendar c = Calendar.getInstance();
+                                    int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+
+                                    ParseObject item = new ParseObject("Calories");
+                                    item.put("food", food);
+                                    item.put("calories", calories);
+                                    item.put("dayOfWeek", dayOfWeek);
+                                    item.saveInBackground();
+
+                                    //Toast to show button works
+                                    Toast added = Toast.makeText(getApplicationContext(),
+                                            food + " added!", Toast.LENGTH_SHORT);
+                                    added.show();
+
+                                }
+                            });
+                            addCalories.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                            addCalories.show();
+                        }
 
                     }
                 })
