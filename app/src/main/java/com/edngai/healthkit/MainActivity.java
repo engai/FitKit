@@ -18,18 +18,24 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.Calendar;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
-
+    String totalString;
     String goalStr;
+    String overUnder;
+    int goal;
+    int totalCalories;
+    List<ParseObject> tempObjects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("FitKit");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Enable Local Datastore.
@@ -120,11 +126,14 @@ public class MainActivity extends AppCompatActivity {
                 if (user == null) {
 
                 } else {
-                    int goal = (int) user.get("caloriesGoal");
+                    dataHolder g = dataHolder.getInstance();
+                    goal = (int) user.get("caloriesGoal");
                     goalStr = Integer.toString(goal);
+                    g.setGoalInput(goal);
                 }
             }
         });
+
     }
 
     /**
@@ -159,11 +168,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // displays the daily summary
     public void clickSummary(View view){
+
+        dataHolder g = dataHolder.getInstance();
+
+        // get total daily calories
+        totalCalories = getTotal();
+        // make totalCalories into a string
+        totalString = Integer.toString(totalCalories);
+
+        if (totalCalories < goal ){
+            overUnder = "under";
+        }
+
+        else if (totalCalories > goal){
+            overUnder = "over";
+        }
+
+        else {
+            overUnder = "equal to";
+        }
 
         AlertDialog.Builder builder1;
         builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("You have inputted a total of (daily calories here) out of " + goalStr);
+        builder1.setMessage("You have inputted a total of " + totalString + " out of " + goalStr + ". You are " + overUnder + " your goal.");
 
         builder1.setCancelable(true);
         builder1.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -174,6 +203,39 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
+    }
+
+    //get total of column in parse
+    public int getTotal() {
+
+        Calendar c = Calendar.getInstance();
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Calories");
+        try {
+
+            totalCalories = 0;
+            List<ParseObject> objects = query.find();
+
+            // for loop that adds up the calories for the current day
+            for (int i = 0; i < objects.size(); i++) {
+                ParseObject temp = objects.get(i);
+                int tempDay = temp.getInt("dayOfWeek");
+                // if the tempDay is the current day of the week
+                if (dayOfWeek == tempDay) {
+                    String tempCalString = temp.getString("calories");
+                    int tempCal = Integer.parseInt(tempCalString);
+                    totalCalories = tempCal + totalCalories;
+
+                }
+            }
+
+            return totalCalories;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
 }

@@ -11,6 +11,7 @@ public class dataHolder {
     private static double resultInput;
     private static double ageInput;
     private static double goalInput;
+    private static double totalInput;
 
     private dataHolder(){}
 
@@ -43,6 +44,10 @@ public class dataHolder {
     public void setGoalInput(double f) { dataHolder.goalInput = f; }
 
     public double getGoalInput() { return dataHolder.goalInput; }
+
+    public void setTotalInput(double total) {dataHolder.totalInput = total; }
+
+    public double getTotalInput() {return dataHolder.totalInput; }
 
     public static synchronized dataHolder getInstance(){
         if (instance == null){

@@ -2,18 +2,15 @@ package com.edngai.healthkit;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -25,13 +22,15 @@ import java.util.Map;
 
 public class dayCalories extends AppCompatActivity {
 
-    int positionClicked, result;
+    int positionClicked, result, goal;
     private TextView dailyCaloriesText, dailyGoalText;
+    String goalString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_calories);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Daily Calories");
@@ -39,8 +38,8 @@ public class dayCalories extends AppCompatActivity {
 
         Intent i = getIntent();
         positionClicked = i.getIntExtra("position", 0) + 1;
-        displayToList();
         displayGoal();
+        displayToList();
 
     }
 
@@ -105,25 +104,23 @@ public class dayCalories extends AppCompatActivity {
             total = total + (Integer.parseInt(calories[i]));
         }
 
+        dataHolder g = dataHolder.getInstance();
+        g.setTotalInput(total* 1.0 );
+
         dailyCaloriesText.setText("Calories: " + Integer.toString(total), TextView.BufferType.NORMAL);
+        if(total > (Double.parseDouble(goalString))){
+            dailyCaloriesText.setTextColor(Color.RED);
+        }
+        else
+            dailyCaloriesText.setTextColor(Color.GREEN);
 
     }
 
     public void displayGoal() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("CalorieGoal");
-        query.orderByDescending("createdAt");
-        query.getFirstInBackground(new GetCallback<ParseObject>() {
-            public void done(ParseObject user, ParseException e) {
-
-                // latest object returned in userBMI. Now, get the bmi. Set the bmi as global.
-                result = (int) user.get("caloriesGoal");
-
-            }
-
-        });
-
+        dataHolder g = dataHolder.getInstance();
+        goalString = Double.toString(g.getGoalInput());
         dailyGoalText = (TextView) findViewById(R.id.dailyGoal);
-        dailyGoalText.setText("Daily Goal: " + Integer.toString(2000));
+        dailyGoalText.setText("Daily Goal: " + goalString);
 
     }
 
