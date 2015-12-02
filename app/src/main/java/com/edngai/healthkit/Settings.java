@@ -38,7 +38,6 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Settings");
@@ -48,20 +47,6 @@ public class Settings extends AppCompatActivity {
 
         //Register AlarmManager Broadcast receive.
         RegisterAlarmBroadcast();
-
-        Button logoutButton = (Button) findViewById(R.id.logoutButton);
-
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                startActivity(new Intent(Settings.this, Login.class));
-
-            }
-
-        });
     }
 
     public void onClickSetAlarm(View v)
@@ -69,7 +54,7 @@ public class Settings extends AppCompatActivity {
         if ((alarmToggle.getText()).equals("OFF")) {
             //Get the current time and set alarm after 10 seconds from current time
             // so here we get
-            alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000, pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 86400000, pendingIntent);
             alarmToggle.setText("ON", TextView.BufferType.NORMAL);
         }
         else {
@@ -91,13 +76,6 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent)
             {
-                /**
-                 * This makes the reminder a toast, but we want something bigger
-                 *
-                 Log.i(TAG, "BroadcastReceiver::OnReceive() >>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                 Toast.makeText(context, "Remember to log your calories for the day!", Toast.LENGTH_LONG).show();
-                 */
-
                 //Creates reminder on the notification bar
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(context)
@@ -149,7 +127,6 @@ public class Settings extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        unregisterReceiver(mReceiver);
         super.onDestroy();
     }
 
